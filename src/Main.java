@@ -1,3 +1,7 @@
+import model.Animal;
+import model.Human;
+import model.Phone;
+
 public class Main {
     public static void main(String[] args) {
         Animal dog = new Animal("canis");

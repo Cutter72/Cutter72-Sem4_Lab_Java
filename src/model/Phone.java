@@ -1,3 +1,5 @@
+package model;
+
 public class Phone {
     private String producer;
     private String model;
@@ -6,7 +8,7 @@ public class Phone {
 
     @Override
     public String toString() {
-        return "Phone{" +
+        return "model.Phone{" +
                 "producer='" + producer + '\'' +
                 ", model='" + model + '\'' +
                 ", operationSystem='" + operationSystem + '\'' +

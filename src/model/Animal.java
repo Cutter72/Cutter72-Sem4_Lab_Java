@@ -1,3 +1,5 @@
+package model;
+
 import java.io.File;
 
 public class Animal {
@@ -26,24 +28,24 @@ public class Animal {
     public void feed() {
         if (this.weight > 0) {
             this.weight += 0.1;
-            System.out.println("Animal is feeded. New weight is: " + this.weight);
+            System.out.println("model.Animal is feeded. New weight is: " + this.weight);
         } else {
-            System.out.println("Animal is dead! To much walk!");
+            System.out.println("model.Animal is dead! To much walk!");
         }
     }
 
     public void takeForAWalk() {
         if (this.weight > 0) {
             this.weight -= 0.1;
-            System.out.println("Animal burned some calories. New weight is: " + this.weight);
+            System.out.println("model.Animal burned some calories. New weight is: " + this.weight);
         } else {
-            System.out.println("Animal is dead! To much walk!");
+            System.out.println("model.Animal is dead! To much walk!");
         }
     }
 
     @Override
     public String toString() {
-        return "Animal{" +
+        return "model.Animal{" +
                 "name='" + name + '\'' +
                 ", weight=" + weight +
                 ", species='" + species + '\'' +
