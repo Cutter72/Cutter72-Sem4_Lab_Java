@@ -1,4 +1,5 @@
 import model.Animal;
+import model.Car;
 import model.Human;
 import model.Phone;
 
@@ -27,12 +28,17 @@ public class Main {
         s11.setProducer("Samsung");
         System.out.println(s11);
 
+        Car deLorean = new Car("DMC", "DeLorean DMC-12");
+        deLorean.setHorsePower(130);
+
         Human zygi = new Human();
         zygi.setName("Zygmunt");
         zygi.setLastName("Chajzer");
         zygi.setGender("Mężczyzna");
         zygi.setAge(50);
         zygi.setPhone(s11);
+        zygi.setPet(dog);
+        zygi.setCar(deLorean);
         System.out.println(zygi);
     }
 }

@@ -7,6 +7,24 @@ public class Human {
     private String gender;
     private Phone phone;
     private Animal pet;
+    private Car car;
+    private Animal animal;
+
+    public Animal getPet() {
+        return pet;
+    }
+
+    public void setPet(Animal pet) {
+        this.pet = pet;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
 
     public Animal getAnimal() {
         return animal;
@@ -15,8 +33,6 @@ public class Human {
     public void setAnimal(Animal animal) {
         this.animal = animal;
     }
-
-    private Animal animal;
 
     public Phone getPhone() {
         return phone;
