@@ -6,6 +6,7 @@ public class Human {
     private int age;
     private String gender;
     private Phone phone;
+    private Animal pet;
 
     public Animal getAnimal() {
         return animal;

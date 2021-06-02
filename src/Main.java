@@ -10,9 +10,15 @@ public class Main {
         System.out.println(dog);
 
         Animal cat = new Animal("feline");
-        dog.setName("Puszek");
-        dog.setWeight(2.0);
+        cat.setName("Puszek");
         System.out.println(cat);
+        for (int i = 0; i < 7; i++) {
+            cat.takeForAWalk();
+            cat.takeForAWalk();
+            cat.takeForAWalk();
+            cat.takeForAWalk();
+            cat.feed();
+        }
 
         Phone s11 = new Phone();
         s11.setModel("S11");

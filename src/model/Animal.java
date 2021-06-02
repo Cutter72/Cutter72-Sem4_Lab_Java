@@ -28,18 +28,18 @@ public class Animal {
     public void feed() {
         if (this.weight > 0) {
             this.weight += 0.1;
-            System.out.println("model.Animal is feeded. New weight is: " + this.weight);
+            System.out.println(name + " is feeded. New weight is: " + this.weight);
         } else {
-            System.out.println("model.Animal is dead! To much walk!");
+            System.out.println(name + " is dead!");
         }
     }
 
     public void takeForAWalk() {
         if (this.weight > 0) {
             this.weight -= 0.1;
-            System.out.println("model.Animal burned some calories. New weight is: " + this.weight);
+            System.out.println(name + " burned some calories. New weight is: " + this.weight);
         } else {
-            System.out.println("model.Animal is dead! To much walk!");
+            System.out.println(name + " is dead! To much walk!");
         }
     }
 
