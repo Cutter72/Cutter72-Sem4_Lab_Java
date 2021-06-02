@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Date;
-
 public class Human {
     private String name;
     private String lastName;
@@ -11,23 +9,6 @@ public class Human {
     private Animal pet;
     private Car car;
     private Animal animal;
-    private Double salary;
-
-    public Double getSalary() {
-        System.out.printf("Salary at: %tT - %.2f%n", new Date(), this.salary);
-        return salary;
-    }
-
-    public void setSalary(Double salary) {
-        if (salary >= 0) {
-            System.out.println("New salary sent to database");
-            System.out.println("Need new annex to the contract for Ms Hania from HR");
-            System.out.println("No need to hide your income. ZUS and US already know your new salary.");
-            this.salary = salary;
-        } else {
-            System.out.println("Error. Salary < 0");
-        }
-    }
 
     public Animal getPet() {
         return pet;
