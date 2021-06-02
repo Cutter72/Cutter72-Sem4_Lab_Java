@@ -42,7 +42,15 @@ public class Human {
     }
 
     public void setCar(Car car) {
-        this.car = car;
+        if (this.salary > car.getValue()) {
+            System.out.println("Car bought with cash!");
+            this.car = car;
+        } else if (this.salary > car.getValue() / 12) {
+            System.out.println("Car bought with loan!");
+            this.car = car;
+        } else {
+            System.out.println("Get a promotion or change a job!");
+        }
     }
 
     public Animal getAnimal() {
