@@ -39,6 +39,9 @@ public class Main {
         zygi.setPhone(s11);
         zygi.setPet(dog);
         zygi.setCar(deLorean);
+        zygi.setSalary(-1.0);
+        zygi.setSalary(1234.5678);
+        zygi.getSalary();
         System.out.println(zygi);
     }
 }
