@@ -1,35 +1,22 @@
 package model.devices;
 
-public class Phone {
-    private String producer;
-    private String model;
+public class Phone extends Device {
     private String operationSystem;
     private String screenSize;
 
     @Override
+    public void turnOn() {
+        System.out.println("Telefon włączony!");
+    }
+
+    @Override
     public String toString() {
         return "model.devices.Phone{" +
-                "producer='" + producer + '\'' +
-                ", model='" + model + '\'' +
+                "producer='" + getProducer() + '\'' +
+                ", model='" + getModel() + '\'' +
                 ", operationSystem='" + operationSystem + '\'' +
                 ", screenSize='" + screenSize + '\'' +
                 '}';
-    }
-
-    public String getProducer() {
-        return producer;
-    }
-
-    public void setProducer(String producer) {
-        this.producer = producer;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
     }
 
     public String getOperationSystem() {

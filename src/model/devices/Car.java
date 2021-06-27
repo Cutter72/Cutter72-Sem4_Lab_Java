@@ -1,21 +1,23 @@
 package model.devices;
 
-public class Car {
-    private final String producer;
-    private final String model;
+public class Car extends Device {
     private double horsePower;
     private double value;
 
     public Car(String producer, String model) {
-        this.producer = producer;
-        this.model = model;
+        super(producer, model);
+    }
+
+    @Override
+    public void turnOn() {
+        System.out.println("Samochód włączony!");
     }
 
     @Override
     public String toString() {
         return "Car{" +
-                "producer='" + producer + '\'' +
-                ", model='" + model + '\'' +
+                "producer='" + getProducer() + '\'' +
+                ", model='" + getModel() + '\'' +
                 ", horsePower=" + horsePower +
                 ", value=" + value +
                 '}';
