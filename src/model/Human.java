@@ -4,6 +4,7 @@ import model.devices.Car;
 import model.devices.Phone;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Human {
     private String name;
@@ -14,9 +15,38 @@ public class Human {
     private Animal pet;
     private Car car;
     private Double salary;
+    private Double cash;
 
     public Human() {
         this.salary = 0.0;
+    }
+
+    public Double getCash() {
+        return cash;
+    }
+
+    public void setCash(Double cash) {
+        this.cash = cash;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Human human = (Human) o;
+        return age == human.age && Objects.equals(name, human.name)
+                && Objects.equals(lastName, human.lastName)
+                && Objects.equals(gender, human.gender)
+                && Objects.equals(phone, human.phone)
+                && Objects.equals(pet, human.pet)
+                && Objects.equals(car, human.car)
+                && Objects.equals(salary, human.salary)
+                && Objects.equals(cash, human.cash);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, lastName, age, gender, phone, pet, car, salary, cash);
     }
 
     public Double getSalary() {
@@ -48,15 +78,16 @@ public class Human {
     }
 
     public void setCar(Car car) {
-        if (this.salary > car.getValue()) {
-            System.out.println("Car bought with cash!");
-            this.car = car;
-        } else if (this.salary > car.getValue() / 12) {
-            System.out.println("Car bought with loan!");
-            this.car = car;
-        } else {
-            System.out.println("Get a promotion or change a job!");
-        }
+        this.car = car;
+//        if (this.salary > car.getValue()) {
+//            System.out.println("Car bought with cash!");
+//            this.car = car;
+//        } else if (this.salary > car.getValue() / 12) {
+//            System.out.println("Car bought with loan!");
+//            this.car = car;
+//        } else {
+//            System.out.println("Get a promotion or change a job!");
+//        }
     }
 
     public Phone getPhone() {
@@ -78,6 +109,7 @@ public class Human {
                 ",\n    pet=" + pet +
                 ",\n    car=" + car +
                 ",\n    salary=" + salary +
+                ",\n    cash=" + cash +
                 '}';
     }
 

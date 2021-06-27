@@ -1,14 +1,15 @@
 package model;
 
 import java.io.File;
+import java.util.Date;
+import java.util.Objects;
 
-public class Animal {
+public class Animal implements Sellable {
+    static final public Double DEFAULT_ANIMAL_WEIGHT = 1.0;
+    private final String species;
     private String name;
     private Double weight;
-    private final String species;
     private File pic;
-
-    static final public Double DEFAULT_ANIMAL_WEIGHT = 1.0;
 
     public Animal(String species) {
         this.species = species;
@@ -24,6 +25,21 @@ public class Animal {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Animal animal = (Animal) o;
+        return Objects.equals(name, animal.name)
+                && Objects.equals(weight, animal.weight)
+                && Objects.equals(species, animal.species)
+                && Objects.equals(pic, animal.pic);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, weight, species, pic);
+    }
 
     public void feed() {
         if (this.weight > 0) {
@@ -79,5 +95,34 @@ public class Animal {
 
     public void setPic(File pic) {
         this.pic = pic;
+    }
+
+    @Override
+    public boolean sell(Human seller, Human buyer, Double price) {
+        if (seller.equals(buyer)) {
+            System.out.printf("%s! Sprzedaż samemu sobie jest bez sensu!%n", buyer.getName());
+            return false;
+        }
+        if (this.equals(seller.getPet())) {
+            if (buyer.getCash() >= price) {
+                seller.setCash(seller.getCash() + price);
+                buyer.setCash(buyer.getCash() - price);
+                buyer.setPet(this);
+                seller.setPet(null);
+                System.out.println("Transakcja zakończona powodzeniem! Szczegóły:");
+                System.out.printf("Sprzedano: %s, %s, %.2f kg za %.2f zł%n",
+                        this.name, this.species, this.weight, price);
+                System.out.printf("Kupił: %s %s%n", buyer.getName(), buyer.getLastName());
+                System.out.printf("Sprzedał: %s %s%n", seller.getName(), seller.getLastName());
+                System.out.println("Data transakcji: " + new Date());
+                return true;
+            } else {
+                System.out.printf("Kupiec %s nie ma tyle pieniędzy!%n", buyer.getName());
+                return false;
+            }
+        } else {
+            System.out.printf("Sprzedawca %s nie ma takiego zwierzęcia!%n", seller.getName());
+            return false;
+        }
     }
 }
