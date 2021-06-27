@@ -1,4 +1,4 @@
-package model;
+package model.devices;
 
 public class Car {
     private final String producer;
@@ -9,6 +9,16 @@ public class Car {
     public Car(String producer, String model) {
         this.producer = producer;
         this.model = model;
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "producer='" + producer + '\'' +
+                ", model='" + model + '\'' +
+                ", horsePower=" + horsePower +
+                ", value=" + value +
+                '}';
     }
 
     public double getValue() {

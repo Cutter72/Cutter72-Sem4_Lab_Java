@@ -1,5 +1,8 @@
 package model;
 
+import model.devices.Car;
+import model.devices.Phone;
+
 import java.util.Date;
 
 public class Human {
@@ -10,8 +13,11 @@ public class Human {
     private Phone phone;
     private Animal pet;
     private Car car;
-    private Animal animal;
     private Double salary;
+
+    public Human() {
+        this.salary = 0.0;
+    }
 
     public Double getSalary() {
         System.out.printf("Salary at: %tT - %.2f%n", new Date(), this.salary);
@@ -53,14 +59,6 @@ public class Human {
         }
     }
 
-    public Animal getAnimal() {
-        return animal;
-    }
-
-    public void setAnimal(Animal animal) {
-        this.animal = animal;
-    }
-
     public Phone getPhone() {
         return phone;
     }
@@ -71,11 +69,15 @@ public class Human {
 
     @Override
     public String toString() {
-        return "model.Human{" +
+        return "Human{" +
                 "name='" + name + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", age='" + age + '\'' +
-                ", gender='" + gender + '\'' +
+                ",\n    age=" + age +
+                ",\n    gender='" + gender + '\'' +
+                ",\n    phone=" + phone +
+                ",\n    pet=" + pet +
+                ",\n    car=" + car +
+                ",\n    salary=" + salary +
                 '}';
     }
 
