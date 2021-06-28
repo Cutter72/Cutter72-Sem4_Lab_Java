@@ -6,7 +6,7 @@ import model.Sellable;
 import java.util.Date;
 import java.util.Objects;
 
-public class Car extends Device implements Sellable {
+public abstract class Car extends Device implements Sellable {
     private double horsePower;
     private double value;
 
@@ -90,4 +90,6 @@ public class Car extends Device implements Sellable {
             return false;
         }
     }
+
+    public abstract void refuel();
 }

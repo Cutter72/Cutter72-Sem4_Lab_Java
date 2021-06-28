@@ -3,10 +3,16 @@ package model.devices;
 import model.Human;
 import model.Sellable;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 public class Phone extends Device implements Sellable {
+    private static final String DEFAULT_PROTOCOL = "https";
+    private static final String DEFAULT_HOST_NAME = "play.google.com";
+    private static final String DEFAULT_VERSION = "1.0.0";
     private String operationSystem;
     private String screenSize;
 
@@ -85,5 +91,43 @@ public class Phone extends Device implements Sellable {
             System.out.printf("Sprzedawca %s nie ma takiego telefonu!%n", seller.getName());
             return false;
         }
+    }
+
+    public boolean installApp(String appName) {
+        return installApp(appName, DEFAULT_VERSION, DEFAULT_HOST_NAME);
+    }
+
+    public boolean installApp(String appName, String version) {
+        return installApp(appName, version, DEFAULT_HOST_NAME);
+    }
+
+    public boolean installApp(String appName, String version, String serverAddress) {
+        try {
+            URL url = new URL(DEFAULT_PROTOCOL, serverAddress, '/' + appName + '-' + version + ".apk");
+            return installApp(url);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            System.out.printf("Nie można utworzyć adresu URL. Aplikacja %S nie została zainstalowana%n", appName);
+            return false;
+        }
+    }
+
+    public boolean installApp(List<String> appNames) {
+        boolean result = false;
+        for (String appName : appNames) {
+            if (result) {
+                installApp(appName);
+            } else {
+                result = installApp(appName);
+            }
+        }
+        return result;
+    }
+
+    public boolean installApp(URL url) {
+        System.out.println("Łączenie z adresem: " + url);
+        System.out.println("Instalowanie... " + url.getFile());
+        System.out.println("Pomyślnie zainstalowano!");
+        return true;
     }
 }

@@ -2,7 +2,12 @@ import model.creatures.Animal;
 import model.creatures.Pet;
 import model.devices.Car;
 import model.Human;
+import model.devices.Electric;
 import model.devices.Phone;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -25,12 +30,12 @@ public class Main {
         s11.setYearOfProduction(2018);
         System.out.println(s11);
 
-        Car deLorean = new Car("DeLorean", "DMC-12");
+        Car deLorean = new Electric("DeLorean", "DMC-12");
         deLorean.setHorsePower(130);
         deLorean.setValue(10000);
         deLorean.setYearOfProduction(2024);
         System.out.println(deLorean);
-        Car deLoreanForComparison = new Car("DeLorean", "DMC-12");
+        Car deLoreanForComparison = new Electric("DeLorean", "DMC-12");
         deLoreanForComparison.setHorsePower(130);
         deLoreanForComparison.setValue(10000);
         System.out.println(deLoreanForComparison);
@@ -66,5 +71,11 @@ public class Main {
         dog.sell(zygi, krzysiu, 1024.0);
         krzysiu.getPhone().sell(krzysiu, zygi, 170.0);
         zygi.getCar().sell(zygi, krzysiu, 5000.0);
+
+        deLorean.refuel();
+        s11.installApp("Sudoku");
+        s11.installApp("2048", "1.2");
+        s11.installApp("Szachy", "1.1", "chess.com");
+        s11.installApp(new ArrayList<>(Arrays.asList("Youtube", "Facebook", "Signal")));
     }
 }
