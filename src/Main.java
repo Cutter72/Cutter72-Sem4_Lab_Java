@@ -7,7 +7,6 @@ import model.devices.Phone;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -32,12 +31,12 @@ public class Main {
 
         Car deLorean = new Electric("DeLorean", "DMC-12");
         deLorean.setHorsePower(130);
-        deLorean.setValue(10000);
+        deLorean.setValue(10000.0);
         deLorean.setYearOfProduction(2024);
         System.out.println(deLorean);
         Car deLoreanForComparison = new Electric("DeLorean", "DMC-12");
         deLoreanForComparison.setHorsePower(130);
-        deLoreanForComparison.setValue(10000);
+        deLoreanForComparison.setValue(10000.0);
         System.out.println(deLoreanForComparison);
         System.out.println("deLoreanForComparison == deLorean is " + (deLoreanForComparison == deLorean));
         System.out.println("deLoreanForComparison.equals(deLorean) is " + deLoreanForComparison.equals(deLorean));
@@ -50,7 +49,7 @@ public class Main {
         zygi.setPet(dog);
         zygi.setSalary(1234.56);
         zygi.setCash(171.7);
-        zygi.setCar(deLorean);
+        zygi.setCar(deLorean, 3);
         System.out.println(zygi);
 
         Human krzysiu = new Human();
@@ -62,15 +61,35 @@ public class Main {
         krzysiu.setPet(cat);
         krzysiu.setSalary(4321.0);
         krzysiu.setCash(6543.0);
-        krzysiu.setCar(deLorean);
+        krzysiu.setCar(deLoreanForComparison, 0);
+        krzysiu.setCar(deLorean, 3);
         System.out.println(krzysiu);
+        System.out.printf("%s posiada w garażu samochody o wartości %.2f zł.%n",
+                krzysiu.getName(), krzysiu.getGargeValue());
+
 
         dog.sell(krzysiu, zygi, 1024.0);
         cat.sell(krzysiu, zygi, 1024.0);
         cat.sell(krzysiu, krzysiu, 1024.0);
         dog.sell(zygi, krzysiu, 1024.0);
         krzysiu.getPhone().sell(krzysiu, zygi, 170.0);
-        zygi.getCar().sell(zygi, krzysiu, 5000.0);
+        try {
+            deLorean.sell(zygi, krzysiu, 5000.0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            deLoreanForComparison.sell(zygi, krzysiu, 5000.0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            deLoreanForComparison.sell(zygi, krzysiu, 50.0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.printf("%s posiada w garażu samochody o wartości %.2f zł.%n",
+                krzysiu.getName(), krzysiu.getGargeValue());
 
         deLorean.refuel();
         s11.installApp("Sudoku");

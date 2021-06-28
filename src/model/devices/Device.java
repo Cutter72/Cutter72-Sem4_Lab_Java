@@ -4,6 +4,7 @@ public abstract class Device {
     private String producer;
     private String model;
     private Integer yearOfProduction;
+    private Double value;
 
     public Device() {
         this.yearOfProduction = 0;
@@ -13,6 +14,14 @@ public abstract class Device {
         this();
         this.producer = producer;
         this.model = model;
+    }
+
+    public Double getValue() {
+        return value;
+    }
+
+    public void setValue(Double value) {
+        this.value = value;
     }
 
     public String getProducer() {

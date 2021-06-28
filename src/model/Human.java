@@ -4,8 +4,11 @@ import model.creatures.Animal;
 import model.devices.Car;
 import model.devices.Phone;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Objects;
+
+import static com.sun.xml.internal.fastinfoset.util.ValueArray.DEFAULT_CAPACITY;
 
 public class Human {
     private String name;
@@ -14,12 +17,23 @@ public class Human {
     private String gender;
     private Phone phone;
     private Animal pet;
-    private Car car;
+
+    public Car[] getGarage() {
+        return garage;
+    }
+
+    private Car[] garage;
     private Double salary;
     private Double cash;
 
     public Human() {
         this.salary = 0.0;
+        this.garage = new Car[DEFAULT_CAPACITY];
+    }
+
+    public Human(int gargeCapacity) {
+        this.salary = 0.0;
+        this.garage = new Car[gargeCapacity];
     }
 
     public Double getCash() {
@@ -40,14 +54,14 @@ public class Human {
                 && Objects.equals(gender, human.gender)
                 && Objects.equals(phone, human.phone)
                 && Objects.equals(pet, human.pet)
-                && Objects.equals(car, human.car)
+                && Arrays.equals(garage, human.garage)
                 && Objects.equals(salary, human.salary)
                 && Objects.equals(cash, human.cash);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, lastName, age, gender, phone, pet, car, salary, cash);
+        return Objects.hash(name, lastName, age, gender, phone, pet, garage, salary, cash);
     }
 
     public Double getSalary() {
@@ -74,12 +88,12 @@ public class Human {
         this.pet = pet;
     }
 
-    public Car getCar() {
-        return car;
+    public Car getCar(int place) {
+        return garage[place];
     }
 
-    public void setCar(Car car) {
-        this.car = car;
+    public void setCar(Car car, int place) {
+        this.garage[place] = car;
 //        if (this.salary > car.getValue()) {
 //            System.out.println("Car bought with cash!");
 //            this.car = car;
@@ -89,6 +103,16 @@ public class Human {
 //        } else {
 //            System.out.println("Get a promotion or change a job!");
 //        }
+    }
+
+    public Double getGargeValue() {
+        Double sum = 0.0;
+        for (Car car : this.garage) {
+            if (car != null) {
+                sum += car.getValue();
+            }
+        }
+        return sum;
     }
 
     public Phone getPhone() {
@@ -108,7 +132,7 @@ public class Human {
                 ",\n    gender='" + gender + '\'' +
                 ",\n    phone=" + phone +
                 ",\n    pet=" + pet +
-                ",\n    car=" + car +
+                ",\n    garage=" + Arrays.toString(garage) +
                 ",\n    salary=" + salary +
                 ",\n    cash=" + cash +
                 '}';
