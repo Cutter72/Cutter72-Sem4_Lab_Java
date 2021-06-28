@@ -1,10 +1,13 @@
-package model;
+package model.creatures;
+
+import model.Human;
+import model.Sellable;
 
 import java.io.File;
 import java.util.Date;
 import java.util.Objects;
 
-public class Animal implements Sellable {
+public abstract class Animal implements Sellable, Feedable {
     static final public Double DEFAULT_ANIMAL_WEIGHT = 1.0;
     private final String species;
     private String name;
@@ -61,7 +64,7 @@ public class Animal implements Sellable {
 
     @Override
     public String toString() {
-        return "model.Animal{" +
+        return "model.creatures.Animal{" +
                 "name='" + name + '\'' +
                 ", weight=" + weight +
                 ", species='" + species + '\'' +

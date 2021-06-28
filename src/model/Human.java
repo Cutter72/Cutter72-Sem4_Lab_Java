@@ -1,5 +1,6 @@
 package model;
 
+import model.creatures.Animal;
 import model.devices.Car;
 import model.devices.Phone;
 

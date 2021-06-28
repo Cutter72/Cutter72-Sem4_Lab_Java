@@ -1,17 +1,20 @@
-import model.Animal;
+import model.creatures.Animal;
+import model.creatures.Pet;
 import model.devices.Car;
 import model.Human;
 import model.devices.Phone;
 
 public class Main {
     public static void main(String[] args) {
-        Animal dog = new Animal("canis");
+        Animal dog = new Pet("canis");
         dog.setName("Szarik");
         dog.setWeight(15.0);
+        dog.feed();
         System.out.println(dog);
 
-        Animal cat = new Animal("feline");
+        Animal cat = new Pet("feline");
         cat.setName("Puszek");
+        cat.feed(2.21);
         System.out.println(cat);
 
         Phone s11 = new Phone();
