@@ -67,7 +67,6 @@ public class Main {
         System.out.printf("%s posiada w garażu samochody o wartości %.2f zł.%n",
                 krzysiu.getName(), krzysiu.getGargeValue());
 
-
         dog.sell(krzysiu, zygi, 1024.0);
         cat.sell(krzysiu, zygi, 1024.0);
         cat.sell(krzysiu, krzysiu, 1024.0);
@@ -96,5 +95,18 @@ public class Main {
         s11.installApp("2048", "1.2");
         s11.installApp("Szachy", "1.1", "chess.com");
         s11.installApp(new ArrayList<>(Arrays.asList("Youtube", "Facebook", "Signal")));
+
+        try {
+            deLorean.sell(zygi, krzysiu, 1.0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("deLorean.didHumanASellThisCarToHumanB(zygi, krzysiu): " +
+                deLorean.didHumanASellThisCarToHumanB(zygi, krzysiu));
+        System.out.println("deLorean.didHumanASellThisCarToHumanB(krzysiu, zygi): " +
+                deLorean.didHumanASellThisCarToHumanB(krzysiu, zygi));
+        System.out.println("deLorean.wasAnOwner(zygi): " + deLorean.wasAnOwner(zygi));
+        System.out.println("deLorean.wasAnOwner(krzysiu): " + deLorean.wasAnOwner(krzysiu));
+        System.out.println("deLorean.transactionsQuantity(): " + deLorean.transactionsQuantity());
     }
 }

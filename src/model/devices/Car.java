@@ -2,15 +2,20 @@ package model.devices;
 
 import model.Human;
 import model.Sellable;
+import model.Transaction;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 public abstract class Car extends Device implements Sellable {
     private Double horsePower;
+    private List<Transaction> transactions;
 
     public Car(String producer, String model) {
         super(producer, model);
+        this.transactions = new ArrayList<>();
     }
 
     @Override
@@ -62,6 +67,13 @@ public abstract class Car extends Device implements Sellable {
         if (buyer.getCash() < price) {
             throw new Exception(String.format("Kupiec %s nie ma tyle pieniędzy!", buyer.getName()));
         }
+        Human owner = getOwner();
+        if (owner != null) {
+            if (!seller.equals(owner)) {
+                throw new Exception(String.format("Sprzedawca %s nie jest właścicielem auta! Ostatni właściciel to: %s %s!",
+                        seller.getName(), owner.getName(), owner.getLastName()));
+            }
+        }
         Car[] sellerGarage = seller.getGarage();
         Car[] buyerGarage = buyer.getGarage();
         boolean hasSellerACar = false;
@@ -90,22 +102,64 @@ public abstract class Car extends Device implements Sellable {
         return true;
     }
 
+    private Human getOwner() {
+        if (this.transactions.size() > 0) {
+            return this.transactions.get(this.transactions.size() - 1).getBuyer();
+        }
+        return null;
+    }
+
     private void executeTransaction(Human seller, Human buyer, Double price, int sellerCarPlace, int buyerEmptyPlace) {
         seller.setCash(seller.getCash() + price);
         buyer.setCash(buyer.getCash() - price);
         buyer.setCar(this, buyerEmptyPlace);
         seller.setCar(null, sellerCarPlace);
-        confirmTransaction(seller, buyer, price);
+        Date transactionDate = new Date();
+        this.transactions.add(new Transaction()
+                .setSeller(seller)
+                .setBuyer(buyer)
+                .setPrice(price)
+                .setDate(transactionDate)
+        );
+        confirmTransaction(seller, buyer, price, transactionDate);
     }
 
-    private void confirmTransaction(Human seller, Human buyer, Double price) {
+    private void confirmTransaction(Human seller, Human buyer, Double price, Date transactionDate) {
         System.out.println("Transakcja zakończona powodzeniem! Szczegóły:");
         System.out.printf("Sprzedano: %s, %s, %dr., %.2fHP za %.2f zł%n",
                 this.getProducer(), this.getModel(), this.getYearOfProduction(), this.getHorsePower(), price);
         System.out.printf("Kupił: %s %s%n", buyer.getName(), buyer.getLastName());
         System.out.printf("Sprzedał: %s %s%n", seller.getName(), seller.getLastName());
-        System.out.println("Data transakcji: " + new Date());
+        System.out.println("Data transakcji: " + transactionDate);
     }
 
     public abstract void refuel();
+
+    public boolean wasAnOwner(Human previousOwner) {
+        boolean result;
+        for (Transaction transaction : this.transactions) {
+            result = transaction.getSeller().equals(previousOwner)
+                    || transaction.getBuyer().equals(previousOwner);
+            if (result) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean didHumanASellThisCarToHumanB(Human a, Human b) {
+        boolean result;
+        for (Transaction transaction : this.transactions) {
+            result = transaction.getSeller().equals(a)
+                    && transaction.getBuyer().equals(b);
+            if (result) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int transactionsQuantity() {
+        return this.transactions.size();
+    }
 }
